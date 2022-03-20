@@ -1,0 +1,42 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My First API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/register": {
+            "get": {
+                "description": "Home page",
+                "operationId": "1c209f7bd51a1e80676e20a76f1544fd",
+                "responses": {
+                    "default": {
+                        "description": "Welcome page"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "authorizationCode": {
+                        "authorizationUrl": "https://travel.madskill.ru/oauth/authorize",
+                        "tokenUrl": "https://travel.madskill.ru/oauth/token",
+                        "refreshUrl": "https://travel.madskill.ru/token/refresh",
+                        "redirectUrl": "https://travel.madskill.ru/auth/callback",
+                        "scopes": []
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
