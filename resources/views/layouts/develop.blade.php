@@ -157,11 +157,26 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li class="has-submenu">
+                                <a href="{{route('weather')}}">
+                                    <i class="mdi mdi-lifebuoy"></i>Погода
+                                </a>
+                            </li>
 
                             @if(in_array('root', Auth::user()->getRoleNames()->toArray()))
                             <li class="has-submenu">
-                                <a href="{{route('attractions.index')}}">
-                                    <i class="mdi mdi-lifebuoy"></i>Достопримечательности<div class="arrow-down"></div></a>
+                                <a href="#">
+                                    <i class="mdi mdi-lifebuoy"></i>Управление сайтом <div class="arrow-down"></div></a>
+                                <ul class="submenu">
+                                    <li class="has-submenu">
+                                        <a href="{{route('users.index')}}">
+                                            <i class="mdi mdi-lifebuoy"></i>Пользователи</a>
+                                    </li>
+                                    <li class="has-submenu">
+                                        <a href="{{route('attractions.index')}}">
+                                            <i class="mdi mdi-lifebuoy"></i>Достопримечательности</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="has-submenu">
                                 <a href="{{route('filemanager.base_route')}}">

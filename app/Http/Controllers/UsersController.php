@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Developer;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Attraction;
+use App\Models\User;
 
-class AttractionController extends Controller
+class UsersController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -24,11 +24,10 @@ class AttractionController extends Controller
      */
     public function index()
     {
-        $attractions = Attraction::get();
-
-        return view('developer.attractions.index', [
-            'title' => 'Достопримечательности',
-            'attractions' => $attractions
+        $users = User::get();
+        return view('developer.users.index', [
+            'title' => 'Управление пользователями',
+            'users' => $users,
         ]);
     }
 
@@ -39,9 +38,7 @@ class AttractionController extends Controller
      */
     public function create()
     {
-        return view('developer.attractions.create', [
-            'title' => 'Создать достопримечательности',
-        ]);
+        //
     }
 
     /**
@@ -52,15 +49,7 @@ class AttractionController extends Controller
      */
     public function store(Request $request)
     {
-        $new_attraction = new Attraction();
-        $new_attraction->name = $request->name;
-        $new_attraction->description = $request->description;
-        $new_attraction->latitude = $request->latitude;
-        $new_attraction->longitude = $request->longitude;
-        $new_attraction->image = $request->image;
-        $new_attraction['3d'] = $request['3d'];
-        $new_attraction->save();
-        return redirect()->route('attractions.index')->withSuccess('Достопримечательность добавлена ' . $new_attraction->name);;
+        //
     }
 
     /**
@@ -105,7 +94,6 @@ class AttractionController extends Controller
      */
     public function destroy($id)
     {
-        Attraction::where('id', $id)->delete();
-        return redirect()->back()->withSuccess('Достопримечательность была успешно удалена');
+        //
     }
 }

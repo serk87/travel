@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Callback</label>
-            <input type="text" name="redirect" readonly class="form-control" id="exampleInputPassword1" value="https://travel.madskill.ru/api/oauth2-callback">
+            <input type="text" name="redirect"  class="form-control" id="exampleInputPassword1" value="https://travel.madskill.ru/api/oauth2-callback">
         </div>
         <div class="form-group">
             <div class="checkbox">

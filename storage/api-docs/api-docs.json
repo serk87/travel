@@ -1,19 +1,112 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "My First API",
+        "title": "Документация API к приложению достопримечательностей",
         "version": "0.1"
     },
+    "servers": [
+        {
+            "url": "https://travel.madskill.ru",
+            "description": "Demo API Server"
+        }
+    ],
     "paths": {
         "/api/register": {
-            "get": {
-                "description": "Home page",
-                "operationId": "1c209f7bd51a1e80676e20a76f1544fd",
+            "post": {
+                "tags": [
+                    "Пользователь"
+                ],
+                "summary": "Регистрация",
+                "description": "Регистрация",
+                "operationId": "registeruser",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "header",
+                        "description": "Ник пользователя",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "header",
+                        "description": "Email пользователя",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "email",
+                            "example": "ivanov@ivan.ru"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "header",
+                        "description": "Пароль пользователя",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
-                    "default": {
-                        "description": "Welcome page"
+                    "200": {
+                        "description": "Успешное выполнение",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Успешно зарегистрированы"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "Текст ошибки"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
+            }
+        },
+        "/api/logout": {
+            "delete": {
+                "tags": [
+                    "Пользователь"
+                ],
+                "summary": "Выход",
+                "description": "Выход",
+                "operationId": "logout",
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
             }
         }
     },

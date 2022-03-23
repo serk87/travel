@@ -213,9 +213,9 @@ return [
                         'read',
                         'write'
                     ],
-
                     'passport' => []
                     */
+                    
                 ],
             ],
         ],

@@ -9,6 +9,17 @@ use App\Models\ApiClient;
 
 class ClientsController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index() {
         if (in_array('root', Auth::user()->getRoleNames()->toArray())) {
         $clients = ApiClient::get();

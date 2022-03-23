@@ -8,13 +8,16 @@ use Illuminate\Http\Request;
 class TestController extends Controller
 {
 
-     /**
- * @OA\Get(
- *     path="/api/register",
- *     description="Home page",
- *     @OA\Response(response="default", description="Welcome page")
- * )
- */
+    // /**
+    //  * Create a new controller instance.
+    //  *
+    //  * @return void
+    //  */
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     
     public function register()
     {

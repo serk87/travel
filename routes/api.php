@@ -1,7 +1,9 @@
 <?php
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\ApiUsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::post('v1/user-register', 'API\TestController@register');
+
+Route::post('register', [API\ApiUsersController::class, 'register'])->name('api.register');
+
+    Route::delete('logout', [API\ApiUsersController::class, 'logout'])->name('api.logout')->middleware('auth:api');

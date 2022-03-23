@@ -25,4 +25,12 @@ class DashboardController extends Controller
         ]
         );
     }
+
+    public function weather() {
+        return view('developer.weather.index',
+        [
+            'title' => "Документация API погоды"
+        ]
+        );
+    }
 }
