@@ -119,9 +119,23 @@ class ApiUsersController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Успешно",
-     *          @OA\MediaType(
-     *           mediaType="application/json",
-     *      )
+     *          @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example="Успешно вышли")
+     *        )
+     *      ),
+     * @OA\Response(
+     *          response=422,
+     *          description="Ошибка",
+     *          @OA\JsonContent(
+     *       @OA\Property(property="error", type="string", example="Ошибка при выходе")
+     *        )
+     *      ),
+     * @OA\Response(
+     *          response=401,
+     *          description="Ошибка",
+     *          @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example="Unauthenticated")
+     *        )
      *      ),
      *  )
      * @SWG\SecurityScheme(
@@ -136,32 +150,18 @@ class ApiUsersController extends Controller
     public function logout(Request $request)
     {
       
-    //     $token = $request->bearerToken();
-    //     DB::table('oauth_access_tokens')
-    //         ->where('id', $token)
-    //         ->delete();
-    // return response()->json([
-    //     'message' => 'Successfully logged out'
-    // ]);
-    //     echo $token;
-    // $request->user()->token()->revoke();
-    //     return response()->json([
-    //       'message' => 'Successfully logged out']);
-    // if (Auth::user()) {
-        $user = Auth::user()->token();
-        return response()->json($user, 200);
-    //     $user->revoke();
-
-    //     return response()->json([
-    //       'success' => true,
-    //       'message' => 'Logout successfully'
-    //   ]);
-    //   }else {
-    //     return response()->json([
-    //       'success' => false,
-    //       'message' => 'Unable to Logout'
-    //     ]);
-    //   }
+        if (Auth::user()) {
+            $user = Auth::user()->token();
+            $user->revoke();
+    
+            return response([
+                'message' => 'Успешно вышли'
+            ], 200);
+          }else {
+            return response([
+                'error' => 'Ошибка при выходе'
+            ], 422);
+          }
     }
 
 

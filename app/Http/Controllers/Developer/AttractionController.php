@@ -58,7 +58,6 @@ class AttractionController extends Controller
         $new_attraction->latitude = $request->latitude;
         $new_attraction->longitude = $request->longitude;
         $new_attraction->image = $request->image;
-        $new_attraction['3d'] = $request['3d'];
         $new_attraction->save();
         return redirect()->route('attractions.index')->withSuccess('Достопримечательность добавлена ' . $new_attraction->name);;
     }

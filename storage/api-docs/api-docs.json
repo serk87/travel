@@ -2,12 +2,16 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Документация API к приложению достопримечательностей",
+        "description": "Авторизация происходит через OAuth2, описание и ссылки на методы надоятся в Authorize",
+        "contact": {
+            "email": "sergei.klimovich.com"
+        },
         "version": "0.1"
     },
     "servers": [
         {
             "url": "https://travel.madskill.ru",
-            "description": "Demo API Server"
+            "description": "API сервер"
         }
     ],
     "paths": {
@@ -98,7 +102,49 @@
                     "200": {
                         "description": "Успешно",
                         "content": {
-                            "application/json": {}
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Успешно вышли"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Ошибка при выходе"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
                         }
                     }
                 },
@@ -114,7 +160,7 @@
         "securitySchemes": {
             "passport": {
                 "type": "oauth2",
-                "description": "Laravel passport oauth2 security.",
+                "description": "Внимание OAuth2 scopes none, grant type code",
                 "in": "header",
                 "scheme": "https",
                 "flows": {

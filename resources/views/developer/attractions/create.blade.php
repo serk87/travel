@@ -42,13 +42,7 @@
                                     <input type="text" id="simpleinput" class="form-control" name="longitude">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2  col-form-label" for="simpleinput">3D</label>
-                                <div class="col-sm-10">
-                                    <input type="text" id="3d" name="3d">
-                                    <button onclick="filemanager.selectFile('3d')">Выбирете</button>
-                                </div>
-                            </div>
+                           
                             <div class="form-group row">
                                 <label class="flex items-center dark:text-gray-400">
                                     <input

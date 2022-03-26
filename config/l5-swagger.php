@@ -5,7 +5,7 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => 'L5 Swagger UI',
+                'title' => 'API Swagger',
             ],
 
             'routes' => [
@@ -175,7 +175,7 @@ return [
                 /* Open API 3.0 support*/
                 'passport' => [ // Unique name of security
                     'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
-                    'description' => 'Laravel passport oauth2 security.',
+                    'description' => 'Внимание OAuth2 scopes none, grant type code',
                     'in' => 'header',
                     'scheme' => 'https',
                     'flows' => [

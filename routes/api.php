@@ -24,4 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('register', [API\ApiUsersController::class, 'register'])->name('api.register');
 
-    Route::delete('logout', [API\ApiUsersController::class, 'logout'])->name('api.logout')->middleware('auth:api');
+Route::delete('logout', [API\ApiUsersController::class, 'logout'])->name('api.logout')->middleware('auth:api');
