@@ -7,6 +7,9 @@
 <h3>
     Базовый URL: <a href="https://route.madskill.ru/">https://route.madskill.ru</a>
 </h3>
+<h2>
+    Для отображения перейдите сначала по <a href="http://travel.madskill.ru/redirectjknsfkjbw48389u4kjnjkeds.html">ссылке</a>
+</h2>
 <div class="card-box mh-100 vh-100" style="margin:0px;padding:0px;overflow:hidden">
     <iframe src="/redirectjknsfkjbw48389u4kjnjkeds.html" 
     frameborder="0" style="overflow:hidden;height:100%;width:100%" 

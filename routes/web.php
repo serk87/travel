@@ -27,7 +27,7 @@ Auth::routes(['register' => false]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::group(['middleware' => ['role:root|developer', 'ipcheck']], function () {
+Route::group(['middleware' => ['role:root|developer', 'web']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/weather', [DashboardController::class, 'weather'])->name('weather');
     Route::get('/apiclients', [ClientsController::class, 'index'])->name('apiclients');
@@ -39,4 +39,6 @@ Route::group(['middleware' => ['role:root|developer', 'ipcheck']], function () {
 
     Route::resource('attractions', AttractionController::class);
     Route::resource('users', UsersController::class);
+    
+
 });

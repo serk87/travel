@@ -15,6 +15,366 @@
         }
     ],
     "paths": {
+        "/api/populate": {
+            "get": {
+                "tags": [
+                    "Достопримечательности"
+                ],
+                "summary": "Популярные Достопримечательности",
+                "description": "Популярные Достопримечательности",
+                "operationId": "populate",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Populate"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Текст ошибки"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/recommendations": {
+            "get": {
+                "tags": [
+                    "Достопримечательности"
+                ],
+                "summary": "Рекомендуемые Достопримечательности",
+                "description": "Рекомендуемые Достопримечательности",
+                "operationId": "recommendations",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Populate"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Текст ошибки"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/search": {
+            "get": {
+                "tags": [
+                    "Достопримечательности"
+                ],
+                "summary": "Поиск Достопримечательностей",
+                "description": "Поиск Достопримечательностей",
+                "operationId": "search",
+                "parameters": [
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "Город",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Populate"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Текст ошибки"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/attraction": {
+            "get": {
+                "tags": [
+                    "Достопримечательности"
+                ],
+                "summary": "Одна Достопримечательность",
+                "description": "Одна Достопримечательность",
+                "operationId": "attraction",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/SingleAttraction"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Текст ошибки"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/rating": {
+            "get": {
+                "tags": [
+                    "Рейтинг"
+                ],
+                "summary": "Получить Рейтинг",
+                "description": "Получить Рейтинг",
+                "operationId": "rating",
+                "parameters": [
+                    {
+                        "name": "attraction_id",
+                        "in": "query",
+                        "description": "id достопримечательности",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Raiting"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Текст ошибки"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Рейтинг"
+                ],
+                "summary": "Изменить Рейтинг",
+                "description": "Изменить Рейтинг",
+                "operationId": "postrating",
+                "parameters": [
+                    {
+                        "name": "attraction_id",
+                        "in": "query",
+                        "description": "id достопримечательности",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "like",
+                        "in": "query",
+                        "description": "Положительная эмоция",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "dislike",
+                        "in": "query",
+                        "description": "Отрицательная эмоция",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Raiting"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Текст ошибки"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/attractions": {
+            "get": {
+                "tags": [
+                    "Достопримечательности"
+                ],
+                "summary": "Достопримечательности",
+                "description": "Достопримечательности",
+                "operationId": "attractions",
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Широта",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Долгота",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Attraction"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Текст ошибки"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/register": {
             "post": {
                 "tags": [
@@ -154,9 +514,723 @@
                     }
                 ]
             }
+        },
+        "/api/profile": {
+            "get": {
+                "tags": [
+                    "Профиль пользователя"
+                ],
+                "summary": "Профиль",
+                "description": "Профиль",
+                "operationId": "profile",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Ваш профиль не заполнен"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Профиль пользователя"
+                ],
+                "summary": "Изменение Профиля",
+                "description": "Изменение Профиля",
+                "operationId": "postprofile",
+                "parameters": [
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "город",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Имя",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "email",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Ваш профиль успешно заполнен"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Ваш профиль не заполнен"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Профиль пользователя"
+                ],
+                "description": "Загрузка фото",
+                "operationId": "76ee035e127a707b7598b1ad77005809",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "description": "file to upload",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Вы не авторизованы"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/visit": {
+            "get": {
+                "tags": [
+                    "Профиль пользователя"
+                ],
+                "summary": "Посещенные достопримечательности",
+                "description": "Посещенные достопримечательности",
+                "operationId": "visit",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Visit"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Ваш профиль не заполнен"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Профиль пользователя"
+                ],
+                "summary": "Изменение посещений",
+                "description": "Изменение посещений",
+                "operationId": "postvisit",
+                "parameters": [
+                    {
+                        "name": "attractionID",
+                        "in": "query",
+                        "description": "id достопримечательности",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Посещение добавлено"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Достопримечательность не найдена"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "423": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "id не может быть пустым"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "424": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Вы не авторизованы"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
         }
     },
     "components": {
+        "schemas": {
+            "Attraction": {
+                "title": "Attraction",
+                "description": "Модель достопримечательности",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Название",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Описание",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    },
+                    "image": {
+                        "title": "image",
+                        "description": "Ссылка на фото",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    },
+                    "latitude": {
+                        "title": "latitude",
+                        "description": "Широта",
+                        "type": "string",
+                        "format": "string",
+                        "example": "55.234"
+                    },
+                    "longitude": {
+                        "title": "longitude",
+                        "description": "Долгота",
+                        "type": "string",
+                        "format": "string",
+                        "example": "33.234"
+                    }
+                },
+                "type": "object"
+            },
+            "Photo": {
+                "title": "Photo",
+                "description": "Модель фотографий",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "attraction_id": {
+                        "title": "attraction_id",
+                        "description": "attraction_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "image": {
+                        "title": "image",
+                        "description": "Название",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    }
+                },
+                "type": "object"
+            },
+            "Populate": {
+                "title": "Populate",
+                "description": "Модель достопримечательности",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Название",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Описание",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    },
+                    "image": {
+                        "title": "image",
+                        "description": "Ссылка на фото",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    },
+                    "city": {
+                        "title": "city",
+                        "description": "Город",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    }
+                },
+                "type": "object"
+            },
+            "Profile": {
+                "title": "Profile",
+                "description": "Модель профиля",
+                "properties": {
+                    "user_id": {
+                        "title": "user_id",
+                        "description": "user_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "photo": {
+                        "title": "photo",
+                        "description": "photo",
+                        "type": "string",
+                        "format": "string",
+                        "example": 1
+                    },
+                    "city": {
+                        "title": "city",
+                        "description": "city",
+                        "type": "string",
+                        "format": "string",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "Raiting": {
+                "title": "Raiting",
+                "description": "Модель рейтингаи",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "attraction_id": {
+                        "title": "attraction_id",
+                        "description": "attraction_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "dislike": {
+                        "title": "dislike",
+                        "description": "dislike",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "like": {
+                        "title": "like",
+                        "description": "like",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "SingleAttraction": {
+                "title": "SingleAttraction",
+                "description": "Модель одной достопримечательности",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Название",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Описание",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    },
+                    "city": {
+                        "title": "city",
+                        "description": "Город",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    },
+                    "photo": {
+                        "title": "photo",
+                        "description": "photo",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Photo"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "Модель пользователя",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name",
+                        "type": "string",
+                        "format": "string",
+                        "example": 1
+                    },
+                    "email_verified_at": {
+                        "title": "email_verified_at",
+                        "description": "email_verified_at",
+                        "type": "string",
+                        "format": "string",
+                        "example": 1
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "description": "created_at",
+                        "type": "string",
+                        "format": "string",
+                        "example": 1
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "description": "updated_at",
+                        "type": "string",
+                        "format": "string",
+                        "example": 1
+                    },
+                    "profile": {
+                        "$ref": "#/components/schemas/Profile"
+                    }
+                },
+                "type": "object"
+            },
+            "Visit": {
+                "title": "Visit",
+                "description": "Модель визитов",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "user_id": {
+                        "title": "user_id",
+                        "description": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "пример"
+                    },
+                    "attraction_id": {
+                        "title": "attraction_id",
+                        "description": "attraction_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "пример"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "description": "created_at",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "description": "updated_at",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    },
+                    "attraction": {
+                        "$ref": "#/components/schemas/Attraction"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {
             "passport": {
                 "type": "oauth2",

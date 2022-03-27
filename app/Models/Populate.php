@@ -7,20 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @OA\Schema(
- *     title="Attraction",
+ *     title="Populate",
  *     description="Модель достопримечательности",
  *     type="object",
  * )
  */
-
-
-
-
-class Attraction extends Model
+class Populate extends Model
 {
     use HasFactory;
 
-    /**
+        /**
      * @OA\Property(
      *     title="id",
      *     description="id",
@@ -67,32 +63,13 @@ class Attraction extends Model
     private $image;
     /**
      * @OA\Property(
-     *     title="latitude",
-     *     description="Широта",
+     *     title="city",
+     *     description="Город",
      *     format="string",
-     *     example="55.234"
+     *     example="пример"
      * )
      *
      * @var string
      */
-    private $latitude;
-    /**
-     * @OA\Property(
-     *     title="longitude",
-     *     description="Долгота",
-     *     format="string",
-     *     example="33.234"
-     * )
-     *
-     * @var string
-     */
-    private $longitude;
-
-    public function photo()
-    {
-        return $this->hasMany(PhotoAttraction::class);
-    }
+    private $city;
 }
-
-
-

@@ -8,6 +8,16 @@
                 @if (session('success'))
                 {{ session('success') }}
                 @endif
+                <form action="{{route('users.create')}}" method="GET"
+                    style="
+                display: inline-block">
+                  @csrf
+                  @method('GET')
+                  <button class="btn btn-danger" type="submit">
+                      Создать
+                  </button>
+                  </form>
+
                 <div class="table-responsive">
                     <table class="table table-centered mb-0" id="btn-editable">
                         <thead>

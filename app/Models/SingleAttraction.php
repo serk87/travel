@@ -5,22 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
  * @OA\Schema(
- *     title="Attraction",
- *     description="Модель достопримечательности",
+ *     title="SingleAttraction",
+ *     description="Модель одной достопримечательности",
  *     type="object",
  * )
  */
 
 
-
-
-class Attraction extends Model
+class SingleAttraction extends Model
 {
     use HasFactory;
 
-    /**
+         /**
      * @OA\Property(
      *     title="id",
      *     description="id",
@@ -56,43 +55,25 @@ class Attraction extends Model
     private $description;
     /**
      * @OA\Property(
-     *     title="image",
-     *     description="Ссылка на фото",
+     *     title="city",
+     *     description="Город",
      *     format="string",
      *     example="пример"
      * )
      *
      * @var string
      */
-    private $image;
-    /**
-     * @OA\Property(
-     *     title="latitude",
-     *     description="Широта",
-     *     format="string",
-     *     example="55.234"
-     * )
-     *
-     * @var string
-     */
-    private $latitude;
-    /**
-     * @OA\Property(
-     *     title="longitude",
-     *     description="Долгота",
-     *     format="string",
-     *     example="33.234"
-     * )
-     *
-     * @var string
-     */
-    private $longitude;
+    private $city;
 
-    public function photo()
-    {
-        return $this->hasMany(PhotoAttraction::class);
-    }
+        /**
+     * @OA\Property(
+     *     title="photo",
+     *     description="photo",
+     * type="array", @OA\Items(ref="#/components/schemas/Photo")
+     * )
+     *
+     * @var string
+     */
+    private $photo;
+
 }
-
-
-

@@ -12,21 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class ApiUsersController extends Controller
 {
-        // /** 
-        // *  @OA\POST(
-        // *     path="/api/registeruser",
-        // *     description="Регистрация",
-        // *     @OA\Response(response="Регистрация", description="Регистрация новых пользователей")
-        // * )
-        // */
-
-//              /**
-//  * @OA\POST(
-//  *     path="/registeruser",
-//  *     description="Регистрация",
-//  *     @OA\Response(response="default", description="Welcome page")
-//  * )
-//  */
+ 
 /**
      * @OA\Post(
      *      path="/api/register",
@@ -107,6 +93,7 @@ class ApiUsersController extends Controller
     }
 
      /**
+     
      * @OA\Delete(
      *      path="/api/logout",
      *      operationId="logout",
@@ -138,18 +125,10 @@ class ApiUsersController extends Controller
      *        )
      *      ),
      *  )
-     * @SWG\SecurityScheme(
- *   securityDefinition="passport",
- *   type="oauth2",
- *   tokenUrl="/oauth/token",
- *   flow="authorizationCode",
- *   scopes={}
- * )
      */
 
-    public function logout(Request $request)
+    public function logout()
     {
-      
         if (Auth::user()) {
             $user = Auth::user()->token();
             $user->revoke();
@@ -159,12 +138,10 @@ class ApiUsersController extends Controller
             ], 200);
           }else {
             return response([
-                'error' => 'Ошибка при выходе'
+                'error' => Auth::user()
             ], 422);
           }
     }
-
-
 
 
 }
