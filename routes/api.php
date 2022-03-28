@@ -39,9 +39,8 @@ Route::post('rating', [API\ApiAditionController::class, 'setrating'])->name('api
 
 
 Route::get('profile', [API\ProfileController::class, 'getprofile'])->middleware('auth:api');
-Route::post('profile', [API\ProfileController::class, 'editprofile'])->middleware('auth:api');
-Route::patch('profile', [API\ProfileController::class, 'photoprofile'])->middleware('auth:api');
+Route::patch('profile', [API\ProfileController::class, 'editprofile'])->middleware('auth:api');
+Route::post('profile', [API\ProfileController::class, 'photoprofile'])->middleware('auth:api');
 
-// Route::get('visit', [API\ProfileController::class, 'getvisit'])->middleware('auth:api');
-Route::get('visit', [API\ProfileController::class, 'getvisit']);
+Route::get('visit', [API\ProfileController::class, 'getvisit'])->middleware('auth:api');
 Route::post('visit', [API\ProfileController::class, 'setvisit'])->middleware('auth:api');

@@ -7,8 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Visit;
+use App\Models\Attraction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Validator;
 
 class ProfileController extends Controller
 {
@@ -83,7 +87,7 @@ class ProfileController extends Controller
     }
 
      /**
-     * @OA\Post(
+     * @OA\Patch(
      *      path="/api/profile",
      *      operationId="postprofile",
      *      tags={"Профиль пользователя"},
@@ -178,7 +182,7 @@ class ProfileController extends Controller
 
 
     /**
-* @OA\Patch(
+* @OA\Post(
 * tags={"Профиль пользователя"},
 * description="Загрузка фото",
 * path="/api/profile",
@@ -189,7 +193,7 @@ class ProfileController extends Controller
 * @OA\Schema(
 * type="object",
 * @OA\Property(
-* description="file to upload",
+* description="photo to upload",
 * property="file",
 
 * type="string",
@@ -226,14 +230,32 @@ class ProfileController extends Controller
 
 
     public function photoprofile(Request $request) {
+        $validator = Validator::make($request->all(),[ 
+            'file' => 'required|mimes:jpg,png,jpeg|max:2048',
+      ]); 
+      if($validator->fails()) {          
+            
+        return response()->json(['error'=>$validator->errors()], 401);                        
+     }  
         if (Auth::user()) {
             try {
             $profile = Profile::where('user_id', Auth::user()->id)->first();
-                    $file = request('photo');
-                    $filecontent = $file->openFile()->fread($file->getSize());
-                    $user->photo = $filecontent;
-                    $user->save();
-            return response()->json(['message'=>"Success"], $this->successStatus);
+               if($profile) {
+        if ($file = $request->file('file')) {
+            $path = $file->store('avatar');
+
+            $request->file('file')->storeAs('/var/www/html/travel/public/avatar', time().'.jpg');
+            $profile->photo = 'https://travel.madskill.ru/avatar/'.time().'.jpg';
+            $profile->save();
+            file_put_contents('/var/www/html/travel/public/avatar/'.time().'.jpg', file_get_contents($file));
+            return response()->json([
+                "message" => "Success"
+            ], 200);
+  
+        }
+    } else {
+        return  response()->json(['error'=>'Ваш профиль не заполнен'], 422);
+    }
         } catch(Error $error) {
             return  response()->json(['error'=>$error], 422);
         }
