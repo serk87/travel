@@ -39,11 +39,11 @@ class UsersController extends Controller
      */
     public function create()
     {
-        for ($i=2; $i < 14; $i++) { 
+        for ($i=33; $i < 34; $i++) { 
             $user = new User;
-        $user->email = "1.user".$i."@madskill.ru";
-        $user->name = "1.user".$i;
-        $user->password = Hash::make("1.user".$i);
+        $user->email = "2.user".$i."@madskill.ru";
+        $user->name = "2.user".$i;
+        $user->password = Hash::make("2.user".$i);
         $user->save();
         $user->assignRole('developer');
 

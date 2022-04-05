@@ -44,3 +44,6 @@ Route::post('profile', [API\ProfileController::class, 'photoprofile'])->middlewa
 
 Route::get('visit', [API\ProfileController::class, 'getvisit'])->middleware('auth:api');
 Route::post('visit', [API\ProfileController::class, 'setvisit'])->middleware('auth:api');
+
+Route::get('ar', [API\ApiAditionController::class, 'getar']);
+Route::get('sound', [API\ApiAditionController::class, 'getsound']);

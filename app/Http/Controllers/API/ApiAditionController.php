@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Attraction;
 use App\Models\Raiting;
 use App\Models\Populate;
+use App\Models\Ar;
+use App\Models\Sound;
 
 class ApiAditionController extends Controller
 {
@@ -84,7 +86,7 @@ class ApiAditionController extends Controller
     public function getrecommendations(Request $request) {
         try {
             $attraction = Attraction::select('id', 'name', 'description', 'image', 'city')
-            ->inRandomOrder()->limit(9)->get();
+            ->inRandomOrder()->limit(5)->get();
             return response()->json($attraction, 200);
         } catch(Error $error) {
             return  response()->json(['error'=>$error], 422);
@@ -320,10 +322,10 @@ class ApiAditionController extends Controller
                 return response()->json($attraction, 200);
 
             } else {
-                $att = Attraction::where('id', $request->id)->first();
+                $att = Attraction::where('id', $request->attraction_id)->first();
                 if ($att) {
                 $rating = new Raiting();
-                $rating->attraction_id = $request->id;
+                $rating->attraction_id = $request->attraction_id;
                 if($request->like && !$request->dislike) {
                     $rating->like = 1; 
                     $rating->dislike = 0; 
@@ -348,4 +350,101 @@ class ApiAditionController extends Controller
     }
     }
     
+    //      /**
+    //  * @OA\Get(
+    //  *      path="/api/ar",
+    //  *      operationId="ar",
+    //  *      tags={"AR"},
+    //  *      summary="Получить AR объкты",
+    //  *      description="Получить AR объктыг",
+    //  * @OA\Response(response="200",
+    //  *      description="OK",
+    //  *         @OA\MediaType(
+    //  *             mediaType="application/json",
+    //  *             @OA\Schema(
+    //  *                 type="array",
+    //  *                 @OA\Items(
+    //  *                   ref="#/components/schemas/Ar"
+    //  *                 ),
+    //  *             )
+    //  *         ),
+    //  *   ),
+    //  * @OA\Response(
+    //  *    response=422,
+    //  *    description="Ошибка",
+    //  *    @OA\JsonContent(
+    //  *       @OA\Property(property="error", type="string", example="Текст ошибки")
+    //  *        )
+    //  *       ),
+    //  *     )
+    //  */
+
+    public function getar(Request $request) {
+        try {
+        $ars = Ar::orderBy('name', 'asc')->get();
+        return response()->json($ars, 200);
+    } catch(Error $error) {
+        return  response()->json(['error'=>$error], 422, $headers);
+    }
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/api/sound",
+     *      operationId="sound",
+     *      tags={"Аудиогид"},
+     *      summary="Получить аудио",
+     *      description="Получить аудио",
+     * @OA\Parameter(
+     *          name="attraction_id",
+     *          description="id достопримечательности",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     * @OA\Response(response="200",
+     *      description="OK",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="array",
+     *                 @OA\Items(
+     *                   ref="#/components/schemas/Sound"
+     *                 ),
+     *             )
+     *         ),
+     *   ),
+     * @OA\Response(
+     *    response=422,
+     *    description="Ошибка",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="error", type="string", example="Текст ошибки")
+     *        )
+     *       ),
+     *     )
+     */
+
+    public function getsound(Request $request) {
+        
+        if ($request->attraction_id) {
+            try {
+                $attraction = Attraction::where('id', $request->attraction_id)->first();
+                if ($attraction) {
+                    $sound = Sound::where('attraction_id', $attraction->id)->get();
+                    return response()->json($sound, 200);
+                } else {
+                    return  response()->json(['error'=>'Достопримечательность не найдена'], 422);
+                }
+                return response()->json($ars, 200);
+            } catch(Error $error) {
+                return  response()->json(['error'=>$error], 422);
+            }
+        } else {
+            return  response()->json(['error'=>'attraction_id не может быть пустым'], 422);
+        }
+        
+    }
+
 }

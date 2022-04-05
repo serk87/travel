@@ -316,6 +316,58 @@
                 }
             }
         },
+        "/api/sound": {
+            "get": {
+                "tags": [
+                    "Аудиогид"
+                ],
+                "summary": "Получить аудио",
+                "description": "Получить аудио",
+                "operationId": "sound",
+                "parameters": [
+                    {
+                        "name": "attraction_id",
+                        "in": "query",
+                        "description": "id достопримечательности",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Sound"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Текст ошибки"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/attractions": {
             "get": {
                 "tags": [
@@ -915,6 +967,41 @@
     },
     "components": {
         "schemas": {
+            "Ar": {
+                "title": "Ar",
+                "description": "AR Модель достопримечательности",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Название",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    },
+                    "fbx": {
+                        "title": "fbx",
+                        "description": "Название",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    },
+                    "dae": {
+                        "title": "dae",
+                        "description": "Название",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
+                    }
+                },
+                "type": "object"
+            },
             "Attraction": {
                 "title": "Attraction",
                 "description": "Модель достопримечательности",
@@ -1136,6 +1223,34 @@
                         "items": {
                             "$ref": "#/components/schemas/Photo"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "Sound": {
+                "title": "Sound",
+                "description": "Аудиогид",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "attraction_id": {
+                        "title": "attraction_id",
+                        "description": "attraction_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "sound": {
+                        "title": "sound",
+                        "description": "Ссылка на аудио файл",
+                        "type": "string",
+                        "format": "string",
+                        "example": "пример"
                     }
                 },
                 "type": "object"

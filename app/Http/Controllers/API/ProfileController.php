@@ -156,6 +156,7 @@ class ProfileController extends Controller
         if (Auth::user()) {
             try {
                 $profile = Profile::where('user_id', Auth::user()->id)->first();
+                if ($profile) {
                 $user = User::where('id', Auth::user()->id)->first();
                 if($request->city) {
                     $profile->city = $request->city;
@@ -169,6 +170,23 @@ class ProfileController extends Controller
                     $user->email = $request->email;
                     $user->save();
                 }
+            } else {
+                $user = User::where('id', Auth::user()->id)->first();
+                $new_profile = new Profile();
+                $new_profile->user_id = $user->id;
+                if($request->city) {
+                    $new_profile->city = $request->city;
+                    $new_profile->save();
+                }
+                if ($request->name) {
+                    $user->name = $request->name;
+                    $user->save();
+                }
+                if ($request->email) {
+                    $user->email = $request->email;
+                    $user->save();
+                }
+            }
                 return  response()->json(['error'=>"Ваш профиль успешно заполнен"], 200);
             } catch(Error $error) {
                 return  response()->json(['error'=>$error], 422);
